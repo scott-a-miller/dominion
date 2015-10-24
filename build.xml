@@ -1,0 +1,31 @@
+<project name="dominion">
+  <path id="classpath">
+    <pathelement location="cls"/>
+	  <fileset dir="jlib">
+      <include name="**/*.jar"/>
+	  </fileset>
+  </path>
+	
+  <target name="clean">
+    <delete dir="cls" quiet="true"/>
+    <delete dir="dist" quiet="true"/>
+  </target>
+  
+  <target name="init">
+    <mkdir dir="cls"/>
+    <mkdir dir="dist"/>
+  	<mkdir dir="deploy"/>
+  	<mkdir dir="jlib"/>
+  </target>
+      
+  <target name="compile" depends="init">
+    <javac debug="true" source="1.5" classpathref="classpath" srcdir="src" destdir="cls"/>
+  </target>
+  
+  <target name="jar" depends="clean,init,compile">
+    <jar destfile="deploy/dominion.jar" compress="true">
+      <fileset dir="cls"/>
+    </jar>
+  </target>
+  
+</project>
